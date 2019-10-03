@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Mansalva', cursive;
+  text-align: center;
+}
+
+.container {
+  margin: 3px;
+  display: grid;
+  grid-template-rows: 15vh 70vh 15vh;
+}
+
+.header {
+  background: rgb(80, 160, 80);
+}
+
+.main {
+  background: rgb(5, 109, 128);
+  width: 100%;
+  position: relative;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgb(52, 170, 52);
+}
+
+.frogs-left {
+  width: 33vw;
+}
+
+.start {
+  width: 33vw;
+  height: 100%;
+  background: rgb(53, 53, 75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.level {
+  width: 33vw;
+}
+
+.frog {
+  height: 50px;
+  /* width: 50px; */
+  position: absolute;
+}
