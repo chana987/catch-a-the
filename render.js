@@ -3,7 +3,9 @@ const Renderer = function() {
     $(".num-level").text(level)
     $(".num-time").text(time)
     $(".main").empty()
+    $(".num-frogs").text(frogGame.getFrogs().length)
     for (let frog of frogs) {
+      // create frogs on screen
       let newFrog = `<div class="frog" data-id="${frog.id}" style="background:${frog.color};
       left:${frog.location[0]}%;
       top:${frog.location[1]}%;
@@ -12,5 +14,11 @@ const Renderer = function() {
       $(".main").append(newFrog)
     }
   }
-  return { renderGame }
+  const renderTime = function(time) {
+    $(".num-time").text(time)
+  }
+  return { 
+    renderGame: renderGame,
+    renderTime: renderTime
+  }
 }
