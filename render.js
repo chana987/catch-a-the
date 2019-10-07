@@ -3,7 +3,7 @@ const Renderer = function() {
     $(".num-level").text(level)
     $(".num-time").text(time)
     $(".main").empty()
-    $(".num-frogs").text(frogGame.getFrogs().length)
+    $(".num-frogs").text(frogs.length)
     for (let frog of frogs) {
       // create frogs on screen
       let newFrog = `<div class="frog" data-id="${frog.id}" style="background:${frog.color};

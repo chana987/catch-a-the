@@ -51,13 +51,30 @@ const FrogGame = function() {
     return _frogs
   }
 
-  const gameOver = function() {}
+  const startGame = function() {
+    frogGame.time = 2
+    frogGame.level = 1
+    frogGame.getFrogs().splice(0)
+    frogGame.addFrog()
+  }
 
-  const upLevel = function() {}
+  const upLevel = function() {
+    frogGame.time += 1
+    frogGame.level += 1
+    for (let i = 0; i < level; i++) {
+      frogGame.addFrog()
+    }
+  }
+
+  const gameOver = function() {
+    alert("Time's up!")
+    frogGame.getFrogs().splice(0)
+    return true
+  }
 
   const countdown = function() {
-    time -= 1
-    if (time <= 3) {
+    frogGame.time -= 1
+    if (frogGame.time <= 3) {
       // let color = $(".time-left").css("color")
       // const changeColor = function(color) {
       //   (color === "red") ? $(".time-left").css("color", "yellow") : $(".time-left").css("color", "red")
@@ -65,11 +82,8 @@ const FrogGame = function() {
       // setInterval(function() {
       //   changeColor(color)
       // }, 300)
-      if (time === 0) {
-        alert("Time's up!")
-        clearInterval(timer)
-        getFrogs().splice(0)
-        renderer.renderGame(frogGame.getFrogs(), "-", "-")
+      if (frogGame.time === 0) {
+        frogGame.gameOver()
       }
     }
   }
@@ -80,6 +94,9 @@ const FrogGame = function() {
     getFrogs: getFrogs,
     time: time,
     level: level,
+    startGame: startGame,
+    upLevel: upLevel,
+    gameOver: gameOver,
     countdown: countdown
   }
 }

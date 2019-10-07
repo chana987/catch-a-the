@@ -1,19 +1,19 @@
 const frogGame = FrogGame()
 const renderer = Renderer()
-const startTimer = function(func) {
-  func()
-  frogGame.timer = setInterval(frogGame.countdown, 1000)
+
+const startTimer = function() {
+  setInterval(function() {
+    frogGame.countdown()
+    renderer.renderTime(frogGame.time)
+}, 1000)
 }
 
 renderer.renderGame(frogGame.getFrogs(), "-", "-")
 
 $(".start").on("click", function() {
-  frogGame.time = 2
-  frogGame.level = 1
-  frogGame.getFrogs().splice(0)
-  frogGame.addFrog()
+  frogGame.startGame()
   renderer.renderGame(frogGame.getFrogs(), frogGame.level, frogGame.time)
-  startTimer(renderer.renderTime(frogGame.time))
+  startTimer()
 })
 
 $(".main").on("click", ".frog", function() {
@@ -22,12 +22,14 @@ $(".main").on("click", ".frog", function() {
   $(".num-frogs").text(frogGame.getFrogs().length)
   renderer.renderGame(frogGame.getFrogs(), frogGame.level, frogGame.time)
   if (frogGame.getFrogs().length === 0) {
-    frogGame.level += 1
-    frogGame.time += 1 
-    for (let i = 0; i < frogGame.level; i++) {
-      frogGame.addFrog()
-    }
+    clearInterval(startTimer)
+    frogGame.upLevel()
     renderer.renderGame(frogGame.getFrogs(), frogGame.level, frogGame.time)
+    startTimer()
   }
-  startTimer(renderer.renderTime(frogGame.time))
 })
+
+if (frogGame.gameOver()) {
+  clearInterval(startTimer)
+  renderer.renderGame(frogGame.getFrogs(), "-", "-")
+}
