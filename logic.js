@@ -2,8 +2,8 @@ const FrogGame = function() {
   let _frogs = []
   let level = 1
   let time = 2
-  let timer
   let frogCounter = 0
+  let running = false
 
   const addFrog = function() {
     frogCounter += 1
@@ -59,9 +59,9 @@ const FrogGame = function() {
   }
 
   const upLevel = function() {
-    frogGame.time += 1
     frogGame.level += 1
-    for (let i = 0; i < level; i++) {
+    frogGame.time = frogGame.level * 2
+    for (let i = 0; i < frogGame.level; i++) {
       frogGame.addFrog()
     }
   }
@@ -69,34 +69,16 @@ const FrogGame = function() {
   const gameOver = function() {
     alert("Time's up!")
     frogGame.getFrogs().splice(0)
-    return true
-  }
-
-  const countdown = function() {
-    frogGame.time -= 1
-    if (frogGame.time <= 3) {
-      // let color = $(".time-left").css("color")
-      // const changeColor = function(color) {
-      //   (color === "red") ? $(".time-left").css("color", "yellow") : $(".time-left").css("color", "red")
-      // }
-      // setInterval(function() {
-      //   changeColor(color)
-      // }, 300)
-      if (frogGame.time === 0) {
-        frogGame.gameOver()
-      }
-    }
   }
 
   return {
-    addFrog: addFrog,
-    removeFrog: removeFrog,
-    getFrogs: getFrogs,
-    time: time,
-    level: level,
-    startGame: startGame,
-    upLevel: upLevel,
-    gameOver: gameOver,
-    countdown: countdown
+    addFrog,
+    removeFrog,
+    getFrogs,
+    time,
+    level,
+    startGame,
+    upLevel,
+    gameOver
   }
 }

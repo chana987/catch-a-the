@@ -17,8 +17,9 @@ const Renderer = function() {
   const renderTime = function(time) {
     $(".num-time").text(time)
   }
+  
   return { 
-    renderGame: renderGame,
-    renderTime: renderTime
+    renderGame,
+    renderTime
   }
 }
