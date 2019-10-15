@@ -16,18 +16,14 @@
   background: rgb(80, 160, 80);
 }
 
+.time-left {
+  color: black;
+}
+
 .main {
   background: rgb(5, 109, 128);
   width: 100%;
   position: relative;
-}
-
-.red {
-  color: red;
-}
-
-.yellow {
-  color: rgb(255, 255, 0);
 }
 
 .footer {
@@ -37,7 +33,7 @@
   background: rgb(52, 170, 52);
 }
 
-.frogs-left {
+.creatures-left {
   width: 33vw;
 }
 
@@ -55,8 +51,7 @@
   width: 33vw;
 }
 
-.frog {
-  min-height: 7px;
-  min-width: 7px;
+.creature {
+  font-size: 5vmin;
   position: absolute;
 }

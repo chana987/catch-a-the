@@ -1,57 +1,58 @@
-const frogGame = FrogGame()
+const game = Game()
 const renderer = Renderer()
-let running 
+let running
+
+const flashTime = function(time) {
+  let x = 1
+  if (time <= 4) {
+    let flash = setInterval(function() {
+      $(".time-left").css("color")
+      if (x === 1) {
+        $(".time-left").css("color", "red")
+        x = 2;
+      } else {
+        $(".time-left").css("color", "yellow")
+        x = 1;
+      }
+      if (game.getCreatures().length === 0) {
+        clearInterval(flash)
+      }
+    }, 500);  
+  }
+}
 
 const startTimer = function() {
   let counter = setInterval(function() {
+    flashTime(game.time)
     running = true
-    frogGame.time -= 1
-    if (frogGame.time === 0) {
-      frogGame.gameOver()
+    game.time -= 1
+    if (game.time === 0) {
+      game.gameOver()
       running = false
       clearInterval(counter)
     }
-    renderer.renderTime(frogGame.time)
+    renderer.renderTime(game.time)
   }, 1000)
 }
-  
-// if (frogGame.time <= 3 && frogGame.time > 0) {
-//   var x;
-//   function changecolors() {
-//     x = 1;
-//     setInterval(change, 500);
-//   }
-//   function change() {
-//     let color = document.getElementById("time-left").style.color
-//     if (x === 1) {
-//       console.log(color)
-//       color = "red";
-//       x = 2;
-//     } else {
-//       color = "green";
-//       x = 1;
-//     }
-//   }
-// }
 
-renderer.renderGame(frogGame.getFrogs(), "2", "0")
+renderer.renderGame(game.getCreatures(), "0", "0")
 
 $(".start").on("click", function() {
-  frogGame.startGame()
-  renderer.renderGame(frogGame.getFrogs(), frogGame.level, frogGame.time)
-  if (frogGame.running === false) {
-    renderer.renderGame(frogGame.getFrogs(), "0", frogGame.time)
+  game.startGame()
+  renderer.renderGame(game.getCreatures(), game.level, game.time)
+  if (game.running === false) {
+    renderer.renderGame(game.getCreatures(), "0", game.time)
   }
   startTimer()
 })
 
-$(".main").on("click", ".frog", function() {
-  let frogID = $(this).data("id")
-  frogGame.removeFrog(frogID)
-  $(".num-frogs").text(frogGame.getFrogs().length)
-  renderer.renderGame(frogGame.getFrogs(), frogGame.level, frogGame.time)
-  if (frogGame.getFrogs().length === 0) {
-    frogGame.upLevel()
-    renderer.renderGame(frogGame.getFrogs(), frogGame.level, frogGame.time)
+$(".main").on("click", ".creature", function() {
+  let creatureID = $(this).data("id")
+  game.removeCreature(creatureID)
+  $(".num-Creatures").text(game.getCreatures().length)
+  renderer.renderGame(game.getCreatures(), game.level, game.time)
+  if (game.getCreatures().length === 0) {
+    game.upLevel()
+    renderer.renderGame(game.getCreatures(), game.level, game.time)
   }
 })

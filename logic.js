@@ -1,12 +1,11 @@
-const FrogGame = function() {
-  let _frogs = []
+const Game = function() {
+  let _creatures = []
   let level = 1
   let time = 2
-  let frogCounter = 0
-  let running = false
+  let creatureCounter = 0
 
-  const addFrog = function() {
-    frogCounter += 1
+  const addCreature = function() {
+    creatureCounter += 1
     // generate random location
     const generateLocation = function() {
       // get viewport dimensions
@@ -32,49 +31,49 @@ const FrogGame = function() {
       color = `rgb(${generateNum()}, ${generateNum()}, ${generateNum()})`
       return color
     }
-    let frog = {
+    let creature = {
       location: generateLocation(),
       color: generateColor(),
-      id: frogCounter
+      id: creatureCounter
     }
     // add to array
-    _frogs.push(frog)
+    _creatures.push(creature)
   }
 
-  const removeFrog = function(frogID) {
-    // remove frog from array
-    const id = _frogs.findIndex(i => i.id === frogID)
-    _frogs.splice(id, 1)
+  const removeCreature = function(creatureID) {
+    // remove Creature from array
+    const id = _creatures.findIndex(i => i.id === creatureID)
+    _creatures.splice(id, 1)
   }
 
-  const getFrogs = function() {
-    return _frogs
+  const getCreatures = function() {
+    return _creatures
   }
 
   const startGame = function() {
-    frogGame.time = 2
-    frogGame.level = 1
-    frogGame.getFrogs().splice(0)
-    frogGame.addFrog()
+    game.time = 2
+    game.level = 1
+    game.getCreatures().splice(0)
+    game.addCreature()
   }
 
   const upLevel = function() {
-    frogGame.level += 1
-    frogGame.time = frogGame.level * 2
-    for (let i = 0; i < frogGame.level; i++) {
-      frogGame.addFrog()
+    game.level += 1
+    game.time = game.level * 2
+    for (let i = 0; i < game.level; i++) {
+      game.addCreature()
     }
   }
 
   const gameOver = function() {
     alert("Time's up!")
-    frogGame.getFrogs().splice(0)
+    game.getCreatures().splice(0)
   }
 
   return {
-    addFrog,
-    removeFrog,
-    getFrogs,
+    addCreature,
+    removeCreature,
+    getCreatures,
     time,
     level,
     startGame,
